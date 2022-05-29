@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { SERVER_URL } from '../../environments/environment';
-
+import { SERVER_URL } from '../../../environments/environment';
+import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
+import { JwtDto } from '../../models/jwt-dto';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,7 +15,11 @@ export class LoginPage implements OnInit {
   email: string = "";
   password: string = "";
 
-  constructor(public httpClient: HttpClient) { }
+  constructor(
+    public httpClient: HttpClient,
+    private tokenService: TokenService,
+    private router: Router
+    ) { }
 
   ngOnInit() { }
 
@@ -23,9 +29,10 @@ export class LoginPage implements OnInit {
       "password": this.password
     }
 
-    this.httpClient.post(SERVER_URL + "/authenticate", postData)
+    this.httpClient.post<JwtDto>(SERVER_URL + "/authenticate", postData)
       .subscribe(data => {
-        console.log(data);
+        this.tokenService.setToken(data.token);
+        this.router.navigate(['/']);
        }, error => {
         console.log(error);
       });

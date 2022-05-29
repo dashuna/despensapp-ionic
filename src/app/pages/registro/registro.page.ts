@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+  selector: 'app-registro',
+  templateUrl: './registro.page.html',
+  styleUrls: ['./registro.page.scss'],
 })
-
-export class SignupPage implements OnInit {
-
+export class RegistroPage implements OnInit {
+  
   name: string = "";
   email: string = "";
   password: string = "";
@@ -22,5 +21,6 @@ export class SignupPage implements OnInit {
       this.name + ', ' + this.email + ', ' + this.password + ', ' + this.confirm_password
      )
   }
+
 
 }

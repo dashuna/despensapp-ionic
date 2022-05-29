@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Lista de inventarios</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let inventory of inventories">
+        <ion-item>
+            <ion-label>{{inventory.name}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>
