@@ -1,0 +1,26 @@
+<app-header title="Lista de Productos"></app-header>
+
+<ion-content fullscreen>
+    <ion-list *ngFor="let producto of productos">
+        <ion-list-header> {{producto.name}} </ion-list-header>
+
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="./{{producto.photo}}" alt="{{producto.name}}" />
+            </ion-avatar>
+            <ion-label>
+                <h2>{{producto.category.name}}</h2>
+                <p>{{producto.description}}</p>
+            </ion-label>
+
+            <ion-note slot="end" color="primary">{{producto.amount}}</ion-note>
+
+        </ion-item>
+    </ion-list>
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button color="primary" routerLink="/nuevo-producto">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

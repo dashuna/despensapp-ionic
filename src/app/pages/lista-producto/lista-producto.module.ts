@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InventarioPageRoutingModule } from './inventario-routing.module';
+import { ListaProductoPageRoutingModule } from './lista-producto-routing.module';
 
-import { InventarioPage } from './inventario.page';
+import { ListaProductoPage } from './lista-producto.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InventarioPageRoutingModule,
+    ListaProductoPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [InventarioPage]
+  declarations: [ListaProductoPage]
 })
-export class InventarioPageModule {}
+export class ListaProductoPageModule {}

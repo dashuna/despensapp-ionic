@@ -1,13 +1,15 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Lista de inventarios</ion-title>
-    </ion-toolbar>
-</ion-header>
+<app-header title="Lista de Inventarios"></app-header>
 
 <ion-content>
-    <ion-list *ngFor="let inventory of inventories">
+    <!-- <ion-list *ngFor="let inventory of inventories">
         <ion-item>
             <ion-label>{{inventory.name}}</ion-label>
         </ion-item>
-    </ion-list>
+    </ion-list> -->
+    <ion-card *ngFor="let inventory of inventories">
+        <ion-item class="ion-text-center" color="light" [routerLink]="[inventory.id, 'lista-producto' ]">
+            <!-- ?idInventory=" {{inventory.id}} -->
+            <ion-label>{{inventory.name}}</ion-label>
+        </ion-item>
+    </ion-card>
 </ion-content>

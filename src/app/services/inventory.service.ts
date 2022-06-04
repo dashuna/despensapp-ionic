@@ -17,6 +17,6 @@ import { Observable } from 'rxjs';
 
     public getInventories(): Observable<InventoryDTO[]> {
         return this.httpClient.get<InventoryDTO[]>(this.inventoryURL);
-      }
+    }
 
 }
