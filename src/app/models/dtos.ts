@@ -1,18 +1,18 @@
 export class InventoryDTO {
-    id: number;
+    id: Number;
     name: string;
 
-    constructor(id: number, name: string) {
+    constructor(id: Number, name: string) {
         this.id = id;
         this.name = name;
     }
 }
 
 export class CategoryDTO {
-    id: number;
+    id: Number;
     name: string;
 
-    constructor(id: number, name: string) {
+    constructor(id: Number, name: string) {
         this.id = id;
         this.name = name;
     }
@@ -20,18 +20,20 @@ export class CategoryDTO {
 
 export class Producto {
     //los campos van a ser los mismos que el dto
-    id?: number;
+    id?: Number;
     name: string;
     description: string;
     category: CategoryDTO;
     photo: Blob;
-    amount: number
+    inventoryId: Number;
+    amount: Number;
 
-    constructor(name: string, description: string, category: CategoryDTO, photo: Blob, amount: number) {
+    constructor(name: string, description: string, category: CategoryDTO, photo: Blob, inventoryId: Number, amount: Number) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.photo = photo;
+        this.inventoryId = inventoryId;
         this.amount = amount;
     }
 }

@@ -25,11 +25,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
-    path: 'nuevo-producto',
+    path: 'inventario/:idInventario/lista-producto/nuevo',
     loadChildren: () => import('./pages/nuevo-producto/nuevo-producto.module').then( m => m.NuevoProductoPageModule)
   },
   {
-    path: 'editar-producto',
+    path: 'inventario/:idInventario/lista-producto/editar/:idProducto',
     loadChildren: () => import('./pages/editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
   },
   {

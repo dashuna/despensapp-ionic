@@ -1,1 +1,68 @@
 <app-header title="Nuevo Producto"></app-header>
+
+<ion-content>
+    <!-- <h3 class="ion-text-center">Rellena el Formulario</h3> -->
+
+    <form #form="ngForm" (ngSubmit)="createProduct()" novalidate>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+                <ion-label position="floating">Nombre del Producto:
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" name="name" [(ngModel)]="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Descripción:
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-textarea required type="text" name="description" [(ngModel)]="description"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Categorías</ion-label>
+                <ion-select [(ngModel)]="categoryId" [ngModelOptions]="{standalone: true}">
+                    <ion-select-option required [value]="category.id" *ngFor="let category of categories">{{category.name}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Foto: </ion-label>
+                <ion-input type="text" name="photo" [(ngModel)]="photo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Cantidad:
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="number" name="amount" [(ngModel)]="amount"></ion-input>
+            </ion-item>
+
+
+            <div class="ion-padding">
+                <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!form.valid">
+                    <ion-icon name="add-circle" slot="icon-only"></ion-icon>Crear
+                </ion-button>
+            </div>
+
+            <!-- <div class="ion-padding">
+                <ion-button expand="block" class="ion-no-margin" color="secondary" (click)="vaciar()">
+                    <ion-icon name="refresh-circle" slot="icon-only"></ion-icon>Vaciar los campos
+                </ion-button>
+            </div> -->
+
+            <div class="ion-padding">
+                <ion-button expand="block" class="ion-no-margin" color="tertiary" (click)="returnToList()">
+                    <ion-icon name="arrow-back-circle" slot="icon-only"></ion-icon>Volver
+                </ion-button>
+            </div>
+        </ion-list>
+    </form>
+
+    <div class="ion-text-center">
+        <ion-label position="floating">
+            <ion-text color="danger">*</ion-text> Campos obligatorios
+        </ion-label>
+    </div>
+
+</ion-content>

@@ -23,11 +23,11 @@ import { InventoryService } from './inventory.service';
         return this.httpClient.get<Producto>(this.productoURL + `detail/${id}`);
     }
 
-    public nuevo(producto: Producto): Observable<any> {
-        return this.httpClient.post<any>(this.productoURL + 'create', producto);
+    public createNewProduct(producto: Producto): Observable<any> {
+        return this.httpClient.post<Producto>(this.productoURL, producto);
     }
 
-    public actualizar(id: number, producto: Producto): Observable<any> {
+    public updateProduct(id: number, producto: Producto): Observable<any> {
         return this.httpClient.put<any>(this.productoURL + `update/${id}`, producto);
     }
 
