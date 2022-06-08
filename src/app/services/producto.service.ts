@@ -19,20 +19,20 @@ import { InventoryService } from './inventory.service';
         return this.httpClient.get<Producto[]>(this.productoURL + `?idInventory=${idInventario}`);
     }
 
-    public detalle(id: number): Observable<Producto> {
-        return this.httpClient.get<Producto>(this.productoURL + `detail/${id}`);
+    public detailProduct(idProducto: Number): Observable<Producto> {
+        return this.httpClient.get<Producto>(this.productoURL + `/${idProducto}`);
     }
 
     public createNewProduct(producto: Producto): Observable<any> {
         return this.httpClient.post<Producto>(this.productoURL, producto);
     }
 
-    public updateProduct(id: number, producto: Producto): Observable<any> {
-        return this.httpClient.put<any>(this.productoURL + `update/${id}`, producto);
+    public updateProduct(producto: Producto): Observable<any> {
+        return this.httpClient.post<any>(this.productoURL, producto);
     }
 
-    public eliminar(id: number): Observable<any> {
-        return this.httpClient.delete<any>(this.productoURL + `delete/${id}`);
+    public deleteProduct(idProducto: number): Observable<any> {
+        return this.httpClient.delete<any>(this.productoURL + `/${idProducto}`);
     }
 }
     

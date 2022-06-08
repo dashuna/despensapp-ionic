@@ -29,11 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/nuevo-producto/nuevo-producto.module').then( m => m.NuevoProductoPageModule)
   },
   {
-    path: 'inventario/:idInventario/lista-producto/editar/:idProducto',
+    path: 'inventario/:idInventario/lista-producto/:idProducto/editar',
     loadChildren: () => import('./pages/editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
   },
   {
-    path: 'detalle-producto',
+    path: 'inventario/:idInventario/lista-producto/detalle/:idProducto',
     loadChildren: () => import('./pages/detalle-producto/detalle-producto.module').then( m => m.DetalleProductoPageModule)
   },
   {
@@ -44,11 +44,11 @@ const routes: Routes = [
     path: 'inventario/:idInventario/lista-producto',
     loadChildren: () => import('./pages/lista-producto/lista-producto.module').then( m => m.ListaProductoPageModule)
   },
-  {
-    path: '**',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

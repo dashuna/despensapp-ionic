@@ -1,9 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>detalleProducto</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Detalle del Producto"></app-header>
 
-<ion-content>
+<ion-content *ngIf="producto">
+    <ion-card>
+        <ion-card-header>
+            <ion-avatar>
+                <img src="./{{producto.photo}}" alt="{{producto.name}}" />
+            </ion-avatar>
+            <ion-card-title><strong>Nombre: </strong>{{producto.name}</ion-card-title>
+            <ion-card-subtitle><strong>Categoría:</strong>{{producto.category.name}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="ion-text-justify">{{producto.description}}</ion-card-content>
+        <ion-note slot="end" color="primary">{{producto.amount}}</ion-note>
+    </ion-card>
 
+    <ion-button expand="block " class="ion-margin-top ion-padding " color="tertiary ">
+        <!-- (click)="volver()" -->
+        <ion-icon name="arrow-back-circle " slot="icon-only "></ion-icon>Volver
+    </ion-button>
+</ion-content>
+
+<!-- en caso de que no haya producto -->
+<ion-content *ngIf="!producto">
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-title>
+            <ion-card-subtitle>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content class="ion-text-justify">
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block " class="ion-margin-top ion-padding " color="tertiary ">
+        <!-- (click)="volver() " -->
+        <ion-icon name="arrow-back-circle " slot="icon-only "></ion-icon>Volver
+    </ion-button>
 </ion-content>

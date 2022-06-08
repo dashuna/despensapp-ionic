@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Producto, CategoryDTO } from '../../models/dtos';
 import { ProductoService } from '../../services/producto.service';
 import { CategoryService } from '../../services/category.service';
-import { InventoryService } from '../../services/inventory.service';
 import { ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -17,7 +16,6 @@ export class NuevoProductoPage implements OnInit {
   name = "";
   description = "";
   categories: CategoryDTO[] = [];
-  
   categoryId: Number = 0;
   photo = null;
   // inventories: InventoryService[] = [];
@@ -43,7 +41,7 @@ export class NuevoProductoPage implements OnInit {
   createProduct() {
     const categorySelected = new CategoryDTO(this.categoryId, null);  
     this.product = new Producto(this.name, this.description, categorySelected, this.photo, this.inventoryId, this.amount);
-    console.log(this.product);
+    // console.log(this.product);
     
     this.productService.createNewProduct(this.product).subscribe(
       data => {
@@ -57,7 +55,6 @@ export class NuevoProductoPage implements OnInit {
     )
     
   }
-
 
   loadCategories() {
     this.categoryService.getCategories().subscribe(
@@ -74,11 +71,12 @@ export class NuevoProductoPage implements OnInit {
     console.log(idCategory);
   }
 
-  async presentToast(mensaje: string) {
+  async presentToast(mensaje: String) {
     const toast = await this.toastController.create({
-      message: mensaje,
+      message: "El producto se ha creado con éxito",
+      color: 'dark',
       duration: 2000,
-      position: 'middle'
+      position: 'bottom'
     });
     toast.present();
   }

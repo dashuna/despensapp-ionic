@@ -6,7 +6,8 @@
 
         <ion-item-sliding>
             <ion-item-options side="start">
-                <ion-item-option routerLink="editar/{{producto.id}}">
+                <ion-item-option color="warning" [routerLink]="producto.id+'/editar'">
+                    <!-- <ion-item-option (click)="editarProducto(producto.id)"> -->
                     <ion-icon name="create-outline" slot="icon-only"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
@@ -16,15 +17,15 @@
                     <img src="./{{producto.photo}}" alt="{{producto.name}}" />
                 </ion-avatar>
                 <ion-label>
-                    <h2>{{producto.category.name}}</h2>
-                    <p>{{producto.description}}</p>
+                    <h2>{{producto.description}}</h2>
+                    <p>{{producto.category.name}}</p>
                 </ion-label>
 
                 <ion-note slot="end" color="primary">{{producto.amount}}</ion-note>
             </ion-item>
 
             <ion-item-options side="end">
-                <ion-item-option (click)="borrarConfirm(producto.id)">
+                <ion-item-option color="danger" (click)="borrarConfirm(producto.id)">
                     <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
                 </ion-item-option>
             </ion-item-options>

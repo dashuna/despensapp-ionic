@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from 'src/app/models/dtos';
 import { ProductoService } from '../../services/producto.service';
 import { InventoryService } from '../../services/inventory.service';
@@ -32,6 +32,11 @@ export class ListaProductoPage implements OnInit {
     this.cargarListaProductos();
   }
 
+  //para que se actualice la pagina con los cambios realizados
+  ionViewWillEnter() {
+    this.cargarListaProductos();
+  }
+
   cargarListaProductos(): void {
     
     this.productoService.getListaProductos(this.idInventory).subscribe(
@@ -45,9 +50,10 @@ export class ListaProductoPage implements OnInit {
     )
   }
 
-  borrarProducto(id: number): void {
-    this.productoService.eliminar(id).subscribe(
+  borrarProducto(idProducto: number): void {
+    this.productoService.deleteProduct(idProducto).subscribe(
       data => {
+        this.cargarListaProductos();
         this.presentToast(data.mensaje);
       },
       err => {
@@ -58,9 +64,9 @@ export class ListaProductoPage implements OnInit {
 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
-      message: mensaje,
+      message: "El producto se ha borrado correctamente!",
       duration: 2000,
-      position: 'middle'
+      position: 'bottom'
     });
     toast.present();
   }
@@ -76,7 +82,7 @@ export class ListaProductoPage implements OnInit {
           text: 'Aceptar',
           id: 'confirm-button',
           handler: () => {
-            // console.log('Confirm Okay');
+             console.log('Confirm Okay');
             this.borrarProducto(id);
           }
         },
@@ -94,4 +100,8 @@ export class ListaProductoPage implements OnInit {
 
     await alert.present();
   }
+
+  // editarProducto(idProducto: Number) {
+  //   this.router.navigate(['/inventario/'+this.idInventory+'/lista-producto/'+idProducto+'/editar']);
+  // }
 }
