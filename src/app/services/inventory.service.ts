@@ -19,4 +19,8 @@ import { Observable } from 'rxjs';
         return this.httpClient.get<InventoryDTO[]>(this.inventoryURL);
     }
 
+    public createNewInventory(inventory: InventoryDTO): Observable<any> {
+      return this.httpClient.post<InventoryDTO>(this.inventoryURL, inventory);
+    }
+
 }

@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'inventario/:idInventario/lista-producto',
     loadChildren: () => import('./pages/lista-producto/lista-producto.module').then( m => m.ListaProductoPageModule)
   },
+  {
+    path: 'inventario/nuevo',
+    loadChildren: () => import('./pages/nuevo-inventario/nuevo-inventario.module').then( m => m.NuevoInventarioPageModule)
+  },
   // {
   //   path: '**',
   //   redirectTo: 'home',
