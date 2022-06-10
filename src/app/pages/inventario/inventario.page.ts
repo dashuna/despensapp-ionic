@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryDTO } from '../../models/dtos';
+import { ModalController } from '@ionic/angular';
+import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
 
 @Component({
   selector: 'app-inventario',
@@ -12,10 +14,15 @@ export class InventarioPage implements OnInit {
   inventories: InventoryDTO[] = [];
 
   constructor(
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
+    this.loadInventories();
+  }
+
+  ionViewWillEnter() {
     this.loadInventories();
   }
 
@@ -28,5 +35,13 @@ export class InventarioPage implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: InvitarModalPage
+    })
+
+    await modal.present();
   }
 }

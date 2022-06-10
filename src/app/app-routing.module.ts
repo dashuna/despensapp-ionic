@@ -48,6 +48,10 @@ const routes: Routes = [
     path: 'inventario/nuevo',
     loadChildren: () => import('./pages/nuevo-inventario/nuevo-inventario.module').then( m => m.NuevoInventarioPageModule)
   },
+  {
+    path: 'invitar-modal',
+    loadChildren: () => import('./pages/invitar-modal/invitar-modal.module').then( m => m.InvitarModalPageModule)
+  },
   // {
   //   path: '**',
   //   redirectTo: 'home',

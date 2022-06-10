@@ -8,6 +8,7 @@ import { InventarioPageRoutingModule } from './inventario-routing.module';
 
 import { InventarioPage } from './inventario.page';
 import { ComponentsModule } from '../../components/components.module';
+import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from '../../components/components.module';
     InventarioPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [InventarioPage]
+  declarations: [InventarioPage, InvitarModalPage],
+  entryComponents: [InvitarModalPage]
 })
 export class InventarioPageModule {}
