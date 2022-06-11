@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InventarioPageRoutingModule } from './inventario-routing.module';
+import { UsuariosPageRoutingModule } from './usuarios-routing.module';
 
-import { InventarioPage } from './inventario.page';
+import { UsuariosPage } from './usuarios.page';
+import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -14,10 +15,10 @@ import { ComponentsModule } from '../../components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InventarioPageRoutingModule,
+    UsuariosPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [InventarioPage],
-  
+  declarations: [UsuariosPage,InvitarModalPage],
+  entryComponents: [InvitarModalPage]
 })
-export class InventarioPageModule {}
+export class UsuariosPageModule {}

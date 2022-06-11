@@ -1,0 +1,20 @@
+<app-header title="Lista de Invitados"></app-header>
+
+<ion-content>
+    <ion-list *ngFor="let guest of guests">
+        <ion-list-header>{{guest.user}}</ion-list-header>
+        <ion-item>
+            <ion-label>
+                <h2>{{guest.name}} {{guest.last_name}}</h2>
+                <p>{{guest.email}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button color="primary" (click)="openModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

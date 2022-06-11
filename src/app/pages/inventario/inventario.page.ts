@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryDTO } from '../../models/dtos';
-import { ModalController } from '@ionic/angular';
-import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
+import { ModalController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inventario',
@@ -15,7 +14,6 @@ export class InventarioPage implements OnInit {
 
   constructor(
     private inventoryService: InventoryService,
-    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -37,11 +35,4 @@ export class InventarioPage implements OnInit {
     )
   }
 
-  async openModal() {
-    const modal = await this.modalController.create({
-      component: InvitarModalPage
-    })
-
-    await modal.present();
-  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../environments/environment';
-import { InventoryDTO } from '../models/dtos';
+import { InventoryDTO, UserDTO } from '../models/dtos';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   })
   export class InventoryService {
   
-    inventoryURL = SERVER_URL + '/inventory/';
+    inventoryURL = SERVER_URL + '/inventory';
   
     constructor(
       private httpClient: HttpClient
@@ -22,5 +22,10 @@ import { Observable } from 'rxjs';
     public createNewInventory(inventory: InventoryDTO): Observable<any> {
       return this.httpClient.post<InventoryDTO>(this.inventoryURL, inventory);
     }
+
+    public getUsersByInventory(idInventory: Number): Observable<UserDTO[]> {
+      return this.httpClient.get<UserDTO[]>(this.inventoryURL + `/${idInventory}/users`);
+  }
+
 
 }

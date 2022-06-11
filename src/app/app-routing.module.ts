@@ -52,6 +52,10 @@ const routes: Routes = [
     path: 'invitar-modal',
     loadChildren: () => import('./pages/invitar-modal/invitar-modal.module').then( m => m.InvitarModalPageModule)
   },
+  {
+    path: 'inventario/:idInventario/usuarios',
+    loadChildren: () => import('./pages/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+  },
   // {
   //   path: '**',
   //   redirectTo: 'home',

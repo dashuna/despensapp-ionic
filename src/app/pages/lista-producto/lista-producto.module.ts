@@ -17,6 +17,6 @@ import { ComponentsModule } from '../../components/components.module';
     ListaProductoPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [ListaProductoPage]
+  declarations: [ListaProductoPage],
 })
 export class ListaProductoPageModule {}

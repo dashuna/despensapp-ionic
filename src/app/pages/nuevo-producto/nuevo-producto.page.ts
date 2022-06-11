@@ -50,7 +50,6 @@ export class NuevoProductoPage implements OnInit {
       },
       err => {
         this.presentToast(err.error.mensaje);
-
       }
     )
     

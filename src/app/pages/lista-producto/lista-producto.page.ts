@@ -22,7 +22,7 @@ export class ListaProductoPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
   ) { 
     this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
 
@@ -104,4 +104,5 @@ export class ListaProductoPage implements OnInit {
   // editarProducto(idProducto: Number) {
   //   this.router.navigate(['/inventario/'+this.idInventory+'/lista-producto/'+idProducto+'/editar']);
   // }
+
 }

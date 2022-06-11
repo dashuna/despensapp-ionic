@@ -37,3 +37,25 @@ export class Producto {
         this.amount = amount;
     }
 }
+
+export class UserDTO {
+    id?: Number;
+    user: string;
+    password: string;
+    name: string;
+    last_name: string;
+    email: string;
+    telephone: string;
+    photo:Blob;
+
+    constructor(user: string, password: string, name: string, last_name: string, email: string, telephone: string, photo:Blob) {
+        // this.id = id;
+        this.user = user;
+        this.password = password;
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.telephone = telephone;
+        this.photo = photo;
+    }
+}
