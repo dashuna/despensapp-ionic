@@ -1,0 +1,47 @@
+ion-toolbar {
+    background-color: var(--ion-color-micolor);
+    ion-title {
+        font-size: 20px;
+    }
+}
+
+ion-segment {
+    background-color: rgb(134, 203, 206);
+    ion-segment-button {
+        ion-label {
+            font-size: 16px;
+        }
+    }
+}
+
+.signcard {
+    // background-color: #eaeaea !important;
+    padding: 15px;
+}
+
+.loginform {
+    padding: 5px;
+}
+
+.signcard {
+    margin-top: 10%;
+    height: 70%;
+    border-radius: 13px;
+    box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.08);
+    background-color: #FFFFFF;
+    z-index: 2;
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    //border-radius: 50%;
+}
+
+.segbtn1 {
+    border-top-left-radius: 13px;
+}
+
+.segbtn2 {
+    border-top-right-radius: 13px;
+}

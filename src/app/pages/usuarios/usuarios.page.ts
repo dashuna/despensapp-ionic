@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
 import { InventoryService } from '../../services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserDTO } from '../../models/dtos';
+import { UserDTO, UserInventoryDTO } from '../../models/dtos';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,7 +13,9 @@ import { UserDTO } from '../../models/dtos';
 export class UsuariosPage implements OnInit {
   
   idInventory: Number;
-  guests: UserDTO[] = [];
+  users: UserDTO[] = [];
+  user: UserInventoryDTO;
+  imAdmin: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -24,16 +26,34 @@ export class UsuariosPage implements OnInit {
    }
 
   ngOnInit() {
-    this.loadListGuests();
+    this.loadUsers();
+    this.isAdmin();
   }
 
-  loadListGuests(): void {
+  loadUsers(): void {
     this.inventoryService.getUsersByInventory(this.idInventory).subscribe(
       data => {
-        this.guests = data;
+        this.users = data;
+        // console.log(this.users);
       },
       err => {
         console.log(err);
+      }
+    )
+  }
+
+  isAdmin() {
+    this.inventoryService.getUserByInventory(this.idInventory).subscribe(
+      data => {
+        console.log(data);
+        this.user = data;
+        console.log(this.user);
+        this.imAdmin = data.accepted;
+        console.log(this.user.isAdmin)
+        
+      },
+      err => {
+
       }
     )
   }

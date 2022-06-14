@@ -59,3 +59,56 @@ export class UserDTO {
         this.photo = photo;
     }
 }
+
+export class UserInventoryDTO {
+    id?:Number;
+    inventory: InventoryDTO;
+    accepted: boolean;
+    isAdmin: boolean;
+    
+    constructor(inventory: InventoryDTO,  accepted: boolean, isAdmin: boolean) {
+        this.inventory = inventory;
+        this.accepted = accepted;
+        this.isAdmin = isAdmin;
+    }
+
+}
+
+export class UserNameDTO {
+    id?: Number;
+    name: string;
+}
+
+export class ShoppingProductDTO {
+    id?: Number;
+    product: Producto;
+    userAdded: UserNameDTO;
+    userBuyed: UserNameDTO;
+    amount: Number;
+    buyed: boolean;
+    addedDate: Date;
+    buyedDate: Date;
+
+    constructor(product: Producto, userAdded: UserNameDTO, userBuyed: UserNameDTO, amount: Number, buyed: boolean, addedDate: Date, buyedDate: Date) {
+        this.product = product;
+        this.userAdded = userAdded;
+        this.userBuyed = userBuyed;
+        this.amount = amount;
+        this.buyed = buyed;
+        this.addedDate = addedDate;
+        this.buyedDate = buyedDate;
+    }
+}
+
+export class ShoppingInventoryDTO {
+    inventoryId: Number;
+    name: string;
+    products: ShoppingProductDTO[];
+
+    constructor(inventoryId: Number, name: string, products: ShoppingProductDTO[]) {
+        this.inventoryId = inventoryId;
+        this.name = name;
+        this.products = products;
+    }
+       
+}

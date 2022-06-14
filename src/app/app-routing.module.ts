@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'inventario/:idInventario/usuarios',
     loadChildren: () => import('./pages/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   },
+  {
+    path: 'shopping-product',
+    loadChildren: () => import('./pages/shopping-product/shopping-product.module').then( m => m.ShoppingProductPageModule)
+  },
   // {
   //   path: '**',
   //   redirectTo: 'home',

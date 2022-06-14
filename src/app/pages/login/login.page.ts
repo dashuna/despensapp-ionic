@@ -15,13 +15,19 @@ export class LoginPage implements OnInit {
   email: string = "";
   password: string = "";
 
+  signform:any;
+  avatarimage: any;
+
   constructor(
     public httpClient: HttpClient,
     private tokenService: TokenService,
     private router: Router
     ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.signform = "login"
+    this.avatarimage = 'assets/images/avatar.png';
+  }
 
   onSubmit() {
     let postData = {

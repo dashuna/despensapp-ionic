@@ -1,17 +1,19 @@
-<app-header title="Lista de Invitados"></app-header>
+<app-header title="Lista de Usuarios"></app-header>
 
 <ion-content>
-    <ion-list *ngFor="let guest of guests">
-        <ion-list-header>{{guest.user}}</ion-list-header>
+    <ion-list *ngFor="let user of users">
+        <ion-list-header>{{user.user}}</ion-list-header>
         <ion-item>
             <ion-label>
-                <h2>{{guest.name}} {{guest.last_name}}</h2>
-                <p>{{guest.email}}</p>
+                <h2>{{user.name}} {{user.last_name}}</h2>
+                <p>{{user.email}}</p>
             </ion-label>
         </ion-item>
+        <!-- photo -->
     </ion-list>
 
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <!-- *ngIf="user.isAdmin == false" -->
         <ion-fab-button color="primary" (click)="openModal()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
