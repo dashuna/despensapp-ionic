@@ -1,9 +1,43 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>shoppingProduct</ion-title>
-  </ion-toolbar>
+<!-- <app-header title="Lista de la compra"></app-header> -->
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <!-- <ion-back-button defaultHref="/" text=""></ion-back-button> -->
+        </ion-buttons>
+        <ion-title>Lista de la Compra</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+    <ion-card class="ion-padding" *ngFor="let shopping of shoppingInventories">
+        <ion-card-title> {{shopping.name}} </ion-card-title>
+
+        <ion-list *ngFor="let product of shopping.products">
+            <ion-item-sliding>
+                <ion-item-options side="start">
+                    <ion-item-option color="success">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+
+                <ion-item>
+                    <ion-avatar slot="start">
+                        <!-- <img src="./{{}}" alt="{{}}" /> -->
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{product.product.name}}</h2>
+                        <p></p>
+                    </ion-label>
+                    <ion-note slot="end" color="primary">{{product.amount}}</ion-note>
+                </ion-item>
+
+                <ion-item-options side="end">
+                    <ion-item-option color="danger">
+                        <ion-icon name="remove-outline"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </ion-card>
 </ion-content>

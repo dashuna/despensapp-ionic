@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { SERVER_URL } from '../../environments/environment.raspi';
+import { SERVER_URL } from '../../environments/environment';
 import { ShoppingInventoryDTO, ShoppingProductDTO } from '../models/dtos';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

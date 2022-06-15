@@ -30,7 +30,7 @@ export class HomePage {
 
   comprobarLogin() {
     if (this.tokenService.isLogged()) {
-      this.router.navigate(['/inventario']);
+      //this.router.navigate(['/inventario']);
     } else {
       this.router.navigate(['/login']);
     }

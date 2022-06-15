@@ -1,4 +1,12 @@
-<app-header title="Lista de Usuarios"></app-header>
+<!-- <app-header title="Lista de Usuarios"></app-header> -->
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Lista de Usuarios</ion-title>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content>
     <ion-list *ngFor="let user of users">

@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/" text=""></ion-back-button>
+            <!-- <ion-back-button defaultHref='{{backLink}}' text=""></ion-back-button> -->
+            <!-- <ion-back-button defaultHref='/inventario' text=""></ion-back-button> -->
+            <!-- <ion-back-button defaultHref='{{backLink}}' text="buscame"></ion-back-button> -->
+            <ion-back-button [defaultHref]='backLink'></ion-back-button>
         </ion-buttons>
         <ion-title>
             {{title}}

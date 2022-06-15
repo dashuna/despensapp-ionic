@@ -1,4 +1,12 @@
-<app-header title="Detalle del Producto"></app-header>
+<!-- <app-header title="Detalle del Producto"></app-header> -->
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Detalle del producto</ion-title>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content *ngIf="producto">
     <ion-card>

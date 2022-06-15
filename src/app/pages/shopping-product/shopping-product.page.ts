@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingProductService } from '../../services/shopping.service';
+import { ShoppingInventoryDTO } from '../../models/dtos';
 
 @Component({
   selector: 'app-shopping-product',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingProductPage implements OnInit {
 
-  constructor() { }
+  shoppingInventories: ShoppingInventoryDTO;
+
+  constructor(
+    private shoppingService: ShoppingProductService,
+  ) { }
 
   ngOnInit() {
+    this.loadShoppingInventories();
   }
 
+  loadShoppingInventories() {
+    this.shoppingService.getShopping().subscribe(
+      data => {
+        this.shoppingInventories = data;
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from 'src/app/models/dtos';
 import { ProductoService } from '../../services/producto.service';
 import { InventoryService } from '../../services/inventory.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { InventoryDTO } from '../../models/dtos';
 import { AlertController, ToastController } from '@ionic/angular';
 
@@ -15,6 +15,7 @@ export class ListaProductoPage implements OnInit {
 
   productos: Producto[] = [];
   idInventory: Number;
+  defaultBackLink: string;
 
   constructor(
     private productoService: ProductoService,
@@ -25,7 +26,6 @@ export class ListaProductoPage implements OnInit {
     private toastController: ToastController,
   ) { 
     this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
-
   }
 
   ngOnInit() {

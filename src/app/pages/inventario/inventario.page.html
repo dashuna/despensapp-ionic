@@ -1,4 +1,12 @@
-<app-header title="Lista de Inventarios"></app-header>
+<!-- <app-header backLink="/inventario" title="Lista de Inventarios"></app-header> -->
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <!-- <ion-back-button defaultHref="/" text=""></ion-back-button> -->
+        </ion-buttons>
+        <ion-title>Lista de Inventarios</ion-title>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content>
     <ion-card *ngFor="let inventory of inventories">
