@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,36 +9,37 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./invitar-modal.page.scss'],
 })
 export class InvitarModalPage implements OnInit {
-
-  idInventory: Number;
-  user: string;
+  @Input() idInventory: Number;
+  username: string;
 
   constructor(
     private modalController: ModalController,
     private inventoryService: InventoryService,
-    private activatedRoute: ActivatedRoute,
   ) {
-    this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
   }
 
 
   ngOnInit() {
-    this.sendInvitation();
+    
   }
 
   sendInvitation() {
-    this.inventoryService.sendInvitation(this.idInventory, this.user).subscribe(
+    this.inventoryService.sendInvitation(this.idInventory, this.username).subscribe(
       data => {
+        console.log(data);
         
+        this.dismissModal(true);
       },
       err => {
-        console.log(err);
+        this.dismissModal(false);
       }
+
     )
   }
   
-  dismissModal()  {
-    this.modalController.dismiss();
+  dismissModal(sended: boolean)  {
+    const onClosedData: boolean = sended;
+    this.modalController.dismiss(onClosedData);
   }
 
 }

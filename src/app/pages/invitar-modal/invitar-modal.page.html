@@ -2,16 +2,25 @@
     <ion-toolbar>
         <ion-title>Invitar Amigos</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="dismissModal()">Close</ion-button>
+            <ion-button (click)="dismissModal(false)">Close</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding">
-    <ion-item>
-        <ion-label position="floating">Amigos</ion-label>
-        <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="invitarAmigo()" class="ion-margin-top">Invitar</ion-button>
+    <form #form="ngForm" (ngSubmit)="sendInvitation()" novalidate>
+
+        <ion-item>
+            <ion-label position="floating">Amigos:</ion-label>
+            <ion-input required type="text" name="username" [(ngModel)]="username"></ion-input>
+        </ion-item>
+
+        <div class="ion-padding">
+            <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!form.valid">
+                <!-- <ion-button color="success" expand="block" type="submit" class="ion-no-margin" (click)="sendInvitation()"> -->
+                Invitar
+            </ion-button>
+        </div>
+    </form>
 </ion-content>

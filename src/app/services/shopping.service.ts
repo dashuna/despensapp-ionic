@@ -15,7 +15,7 @@ export class ShoppingProductService {
     ) {}
 
     public insertShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<any> {
-        return this.httpClient.post<any>(this.shoppingURL + shoppingProduct, null);
+        return this.httpClient.post<ShoppingProductDTO>(this.shoppingURL, shoppingProduct);
     }
 
     public getShopping(): Observable<ShoppingInventoryDTO> {

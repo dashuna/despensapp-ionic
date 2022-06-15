@@ -77,6 +77,10 @@ export class UserInventoryDTO {
 export class UserNameDTO {
     id?: Number;
     name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
 }
 
 export class ShoppingProductDTO {

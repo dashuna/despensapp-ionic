@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Producto } from 'src/app/models/dtos';
+import { Producto, ShoppingInventoryDTO, ShoppingProductDTO } from 'src/app/models/dtos';
 import { ProductoService } from '../../services/producto.service';
 import { InventoryService } from '../../services/inventory.service';
 import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
-import { InventoryDTO } from '../../models/dtos';
+import { InventoryDTO, UserNameDTO } from '../../models/dtos';
 import { AlertController, ToastController } from '@ionic/angular';
+import { ShoppingProductService } from 'src/app/services/shopping.service';
 
 @Component({
   selector: 'app-lista-producto',
@@ -16,6 +17,8 @@ export class ListaProductoPage implements OnInit {
   productos: Producto[] = [];
   idInventory: Number;
   defaultBackLink: string;
+  shoppingProduct: ShoppingProductDTO;
+
 
   constructor(
     private productoService: ProductoService,
@@ -24,6 +27,7 @@ export class ListaProductoPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
+    private shoppingService: ShoppingProductService
   ) { 
     this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
   }
@@ -38,7 +42,6 @@ export class ListaProductoPage implements OnInit {
   }
 
   cargarListaProductos(): void {
-    
     this.productoService.getListaProductos(this.idInventory).subscribe(
       data => {
         this.productos = data;
@@ -105,4 +108,55 @@ export class ListaProductoPage implements OnInit {
   //   this.router.navigate(['/inventario/'+this.idInventory+'/lista-producto/'+idProducto+'/editar']);
   // }
 
+  addToShopping(product, data) {
+
+    this.shoppingProduct = new ShoppingProductDTO(product, null, null, data.unidades, false, null, null);
+
+    // this.amount = 
+    this.shoppingService.insertShoppingProduct(this.shoppingProduct).subscribe(
+      data => {
+        // this.presentToast(data.mensaje = "El producto se ha añadido a la lista de la compra.");
+        this.shoppingProduct = data;
+      }, 
+      err => {
+        // this.presentToast(err.error.mensaje = "El producto no se ha podido añadir a la lista.");
+        console.log("Error");
+      }
+    )
+  }
+
+  async alertShopping(product) {
+    const alert = await this.alertController.create({
+      header: 'Indica las unidades que necesitas.',
+      message: '',
+      inputs: [
+        {
+          name: 'unidades',
+          type: 'number',
+          placeholder: 'Unidades',
+          value: 1
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Añadir',
+          handler: (data) => {
+            console.log('Confirm Ok');
+            this.addToShopping(product,data);
+          }
+        }
+      ],
+    });
+
+    await alert.present();
+  }
 }
+
+

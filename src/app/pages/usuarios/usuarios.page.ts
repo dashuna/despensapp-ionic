@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { InvitarModalPage } from '../invitar-modal/invitar-modal.page';
 import { InventoryService } from '../../services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +21,7 @@ export class UsuariosPage implements OnInit {
     private modalController: ModalController,
     private inventoryService: InventoryService,
     private activatedRoute: ActivatedRoute,
+    private toastController: ToastController,
   ) {
     this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
    }
@@ -58,16 +59,32 @@ export class UsuariosPage implements OnInit {
     )
   }
 
-
-
-
-
   async openModal() {
     const modal = await this.modalController.create({
-      component: InvitarModalPage
+      component: InvitarModalPage,
+      componentProps: {
+        'idInventory': this.idInventory
+      }
     })
 
+    modal.onDidDismiss().then((dataReturned) => {
+      if(dataReturned.data) {
+        this.presentToast("Se ha enviado la invitacion");
+      } else {
+        this.presentToast("No se ha enviado la invitacion");
+      }
+    });
+
     await modal.present();
+  }
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   // const alert = await this.alertController.create({header: 'Success', message: 'Su invitación se ha enviado con éxito', buttons: ['Cancelar']});
