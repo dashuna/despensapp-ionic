@@ -66,11 +66,13 @@ export class UserInventoryDTO {
     accepted: boolean;
     isAdmin: boolean;
     
-    constructor(inventory: InventoryDTO,  accepted: boolean, isAdmin: boolean) {
+    constructor(id: Number, inventory: InventoryDTO,  accepted: boolean, isAdmin: boolean) {
+        this.id = id;
         this.inventory = inventory;
         this.accepted = accepted;
         this.isAdmin = isAdmin;
     }
+
 
 }
 

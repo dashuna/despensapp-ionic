@@ -1,0 +1,21 @@
+ion-toolbar {
+    background-color: var(--ion-color-micolor);
+    ion-title {
+        font-size: 20px;
+        color: white
+    }
+}
+
+.divider {
+    padding: 5px;
+    margin: 10px;
+    background-color: #8ae1e7;
+    ion-label {
+        text-align: center;
+        padding: 0 10px 0 10px;
+    }
+}
+
+ion-card {
+    // margin: 20px;
+}

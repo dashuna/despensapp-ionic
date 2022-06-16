@@ -14,11 +14,15 @@ export class ShoppingProductService {
         private httpClient: HttpClient,
     ) {}
 
-    public insertShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<any> {
+    public insertShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<ShoppingProductDTO> {
         return this.httpClient.post<ShoppingProductDTO>(this.shoppingURL, shoppingProduct);
     }
 
     public getShopping(): Observable<ShoppingInventoryDTO> {
         return this.httpClient.get<ShoppingInventoryDTO>(this.shoppingURL);
+    }
+
+    public updateAmountShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<ShoppingProductDTO> {
+        return this.httpClient.patch<ShoppingProductDTO>(this.shoppingURL, shoppingProduct);
     }
 }

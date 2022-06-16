@@ -1,6 +1,6 @@
 <!-- <app-header backLink="/inventario" title="Lista de Inventarios"></app-header> -->
 <ion-header [translucent]="true">
-    <ion-toolbar color="primary">
+    <ion-toolbar color="micolor">
         <ion-buttons slot="start">
             <!-- <ion-back-button defaultHref="/" text=""></ion-back-button> -->
         </ion-buttons>
@@ -9,39 +9,51 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let inventory of inventories">
 
-        <ion-item *ngIf="inventory.accepted" class="ion-text-center" color="light" [routerLink]="[inventory.inventory.id, 'lista-producto' ]">
-            <ion-label>{{inventory.inventory.name}}</ion-label>
-        </ion-item>
+    <ion-item-group>
+        <ion-item-divider class="divider">
+            <ion-label>Tus Inventarios</ion-label>
+        </ion-item-divider>
 
-    </ion-card>
+
+        <ion-card *ngFor="let inventory of inventories">
+            <ion-item *ngIf="inventory.accepted" class="ion-text-center" color="light" [routerLink]="[inventory.inventory.id, 'lista-producto' ]">
+                <ion-label>{{inventory.inventory.name}}</ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-item-group>
+    <ion-item-group *ngIf="hasInvitations">
+        <ion-item-divider class="divider">
+            <ion-label>
+                Inventarios Pendientes
+            </ion-label>
+        </ion-item-divider>
+        <ng-container *ngFor="let inventory of inventories">
+            <ion-card *ngIf="!inventory.accepted">
+                <ion-item-sliding>
+                    <ion-item-options side="start">
+                        <ion-item-option color="success" (click)="updateInvitation(inventory.id, true)">
+                            <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+
+                    <ion-item class="ion-text-center" color="pendiente">
+                        <ion-label>{{inventory.inventory.name}}</ion-label>
+                    </ion-item>
+
+                    <ion-item-options side="end">
+                        <ion-item-option color="danger" (click)="updateInvitation(inventory.id, false)">
+                            <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+                        </ion-item-option>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-card>
+        </ng-container>
+    </ion-item-group>
 
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-        <ion-fab-button color="primary" routerLink="nuevo">
+        <ion-fab-button color="micolor" routerLink="nuevo">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-
-
-    <ion-card *ngFor="let inventory of inventories">
-
-        <ion-item-sliding *ngIf="!inventory.accepted">
-            <ion-item-options side="start">
-                <ion-item-option color="success">
-                    <ion-icon name="checkmark-outline" slot="icon-only"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
-
-            <ion-item class="ion-text-center" color="warning">
-                <ion-label>{{inventory.inventory.name}}</ion-label>
-            </ion-item>
-
-            <ion-item-options side="end">
-                <ion-item-option color="danger">
-                    <ion-icon name="close-outline" slot="icon-only"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
-
-        </ion-item-sliding>
-    </ion-card>
+</ion-content>

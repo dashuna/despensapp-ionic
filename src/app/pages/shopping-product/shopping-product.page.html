@@ -1,6 +1,6 @@
 <!-- <app-header title="Lista de la compra"></app-header> -->
 <ion-header [translucent]="true">
-    <ion-toolbar color="primary">
+    <ion-toolbar color="micolor">
         <ion-buttons slot="start">
             <!-- <ion-back-button defaultHref="/" text=""></ion-back-button> -->
         </ion-buttons>
@@ -23,13 +23,19 @@
 
                 <ion-item>
                     <ion-avatar slot="start">
-                        <!-- <img src="./{{}}" alt="{{}}" /> -->
+                        <img src="{{product.product.photo}}" alt="{{product.product.name}}" />
                     </ion-avatar>
+
                     <ion-label>
                         <h2>{{product.product.name}}</h2>
-                        <p></p>
                     </ion-label>
-                    <ion-note slot="end" color="primary">{{product.amount}}</ion-note>
+
+                    <ion-chip slot="end">
+                        <ion-icon name="add" (click)="modifyAmount(product, 1)"></ion-icon>
+                        <ion-input type="number" (change)="updateAmount(product)" [(ngModel)]="product.amount" value="{{product.amount}}"></ion-input>
+                        <ion-icon name="remove" (click)="modifyAmount(product, -1)"></ion-icon>
+                    </ion-chip>
+
                 </ion-item>
 
                 <ion-item-options side="end">

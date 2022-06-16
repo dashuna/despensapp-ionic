@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingProductService } from '../../services/shopping.service';
-import { ShoppingInventoryDTO } from '../../models/dtos';
+import { ShoppingInventoryDTO, Producto, ShoppingProductDTO } from '../../models/dtos';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-shopping-product',
@@ -12,7 +13,7 @@ export class ShoppingProductPage implements OnInit {
   shoppingInventories: ShoppingInventoryDTO;
 
   constructor(
-    private shoppingService: ShoppingProductService,
+    private shoppingService: ShoppingProductService
   ) { }
 
   ngOnInit() {
@@ -29,5 +30,16 @@ export class ShoppingProductPage implements OnInit {
         console.log(err);
       }
     )
+  }
+  modifyAmount(shoppingProductDTO: ShoppingProductDTO, diff: Number) {
+    shoppingProductDTO.amount = shoppingProductDTO.amount.valueOf() + diff.valueOf();
+    if(shoppingProductDTO.amount < 0) {
+      shoppingProductDTO.amount = 0;
+    }
+    this.updateAmount(shoppingProductDTO);
+  }
+
+  updateAmount(shoppingProductDTO: ShoppingProductDTO) {
+    this.shoppingService.updateAmountShoppingProduct(shoppingProductDTO).subscribe();
   }
 }

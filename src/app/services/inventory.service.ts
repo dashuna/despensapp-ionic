@@ -39,4 +39,8 @@ import { Observable } from 'rxjs';
       return this.httpClient.post<UserInventoryDTO>(this.inventoryURL + `/${idInventory}/invitation/${user}`, null);
     }
 
+    public updateInvitation(userInventory: UserInventoryDTO): Observable<any> {
+      return this.httpClient.patch<UserInventoryDTO>(this.inventoryURL + '/invitation', userInventory);
+    }
+
 }

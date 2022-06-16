@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryDTO, UserInventoryDTO } from '../../models/dtos';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inventario',
@@ -12,10 +12,11 @@ export class InventarioPage implements OnInit {
 
   // inventories: InventoryDTO[] = [];
   inventories: UserInventoryDTO[] = [];
-  inventory: UserInventoryDTO;
+  hasInvitations: boolean = false;
 
   constructor(
     private inventoryService: InventoryService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -31,6 +32,8 @@ export class InventarioPage implements OnInit {
     this.inventoryService.getInventories().subscribe(
       data => {
         this.inventories = data;
+
+        this.hasInvitations = this.inventories.some(inv => !inv.accepted);
         console.log(this.inventories);
       },
       err => {
@@ -39,16 +42,32 @@ export class InventarioPage implements OnInit {
     )
   }
 
-  // isAccepted() {
-  //   this.inventoryService.getUserByInventory(this.inventory.id).subscribe(
-  //     data => {
-  //       console.log(data);
-        
-  //     },
-  //     err => {
+  updateInvitation(userInventoryId: Number, accepted: boolean) {
+    const userInventory = new UserInventoryDTO(userInventoryId, null, accepted, null);
+    this.inventoryService.updateInvitation(userInventory).subscribe(
+      data => {
+        if(accepted) {
+          this.presentToast("El inventario ha sido Aceptado!");
+        } else {
+        this.presentToast("El inventario ha sido Rechazado!");
+        }
+        this.loadInventories();
+      }, 
+      err => {
+        this.presentToast("No se ha podido actualizar el estado de tu Inventario!");
+        console.log(err);
+      }
+    )
+  }
 
-  //     }
-  //   )
-  // }
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      color: 'dark',
+      duration: 2000,
+      position: 'bottom'
+    });
+    await toast.present();
+  }
 
 }

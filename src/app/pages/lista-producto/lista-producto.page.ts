@@ -57,17 +57,17 @@ export class ListaProductoPage implements OnInit {
     this.productoService.deleteProduct(idProducto).subscribe(
       data => {
         this.cargarListaProductos();
-        this.presentToast(data.mensaje);
+        this.presentToast("El producto se ha borrado correctamente!");
       },
       err => {
-        this.presentToast(err.error.mensaje);
+        this.presentToast("Se ha producido un error.");
       }
     )
   }
 
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
-      message: "El producto se ha borrado correctamente!",
+      message: mensaje,
       duration: 2000,
       position: 'bottom'
     });
@@ -115,12 +115,12 @@ export class ListaProductoPage implements OnInit {
     // this.amount = 
     this.shoppingService.insertShoppingProduct(this.shoppingProduct).subscribe(
       data => {
-        // this.presentToast(data.mensaje = "El producto se ha añadido a la lista de la compra.");
+        this.presentToast("El producto se ha añadido a la lista de la compra.");
         this.shoppingProduct = data;
       }, 
       err => {
-        // this.presentToast(err.error.mensaje = "El producto no se ha podido añadir a la lista.");
         console.log("Error");
+        this.presentToast("Este producto ya está en la lista de la compra.")
       }
     )
   }

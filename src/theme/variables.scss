@@ -76,6 +76,19 @@
     --ion-color-micolor-tint: #50bac1;
 }
 
+.ion-color-micolor {
+    --ion-color-base: var(--ion-color-micolor);
+    --ion-color-base-rgb: var(--ion-color-micolor-rgb);
+    --ion-color-contrast: var(--ion-color-micolor-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-micolor-contrast-rgb);
+    --ion-color-shade: var(--ion-color-micolor-shade);
+    --ion-color-tint: var(--ion-color-micolor-tint);
+}
+
+.ion-color-pendiente {
+    --ion-color-base: #fad765;
+}
+
 @media (prefers-color-scheme: dark) {
     /*
    * Dark Colors
