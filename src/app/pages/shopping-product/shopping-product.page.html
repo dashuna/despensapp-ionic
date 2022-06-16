@@ -15,7 +15,7 @@
 
         <ion-list *ngFor="let product of shopping.products">
             <ion-item-sliding>
-                <ion-item-options side="start">
+                <ion-item-options side="start" (click)="buyShoppingProduct(product)">
                     <ion-item-option color="success">
                         <ion-icon name="add-outline"></ion-icon>
                     </ion-item-option>
@@ -31,15 +31,15 @@
                     </ion-label>
 
                     <ion-chip slot="end">
-                        <ion-icon name="add" (click)="modifyAmount(product, 1)"></ion-icon>
-                        <ion-input type="number" (change)="updateAmount(product)" [(ngModel)]="product.amount" value="{{product.amount}}"></ion-input>
                         <ion-icon name="remove" (click)="modifyAmount(product, -1)"></ion-icon>
+                        <ion-input type="number" (change)="updateAmount(product)" [(ngModel)]="product.amount" value="{{product.amount}}"></ion-input>
+                        <ion-icon name="add" (click)="modifyAmount(product, 1)"></ion-icon>
                     </ion-chip>
 
                 </ion-item>
 
                 <ion-item-options side="end">
-                    <ion-item-option color="danger">
+                    <ion-item-option color="danger" (click)="borrarConfirm(product)">
                         <ion-icon name="remove-outline"></ion-icon>
                     </ion-item-option>
                 </ion-item-options>

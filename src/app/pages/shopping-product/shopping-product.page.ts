@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingProductService } from '../../services/shopping.service';
 import { ShoppingInventoryDTO, Producto, ShoppingProductDTO } from '../../models/dtos';
 import { ProductoService } from '../../services/producto.service';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-shopping-product',
@@ -13,10 +14,16 @@ export class ShoppingProductPage implements OnInit {
   shoppingInventories: ShoppingInventoryDTO;
 
   constructor(
-    private shoppingService: ShoppingProductService
+    private shoppingService: ShoppingProductService,
+    private toastController: ToastController,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
+    this.loadShoppingInventories();
+  }
+
+  ionViewWillEnter() {
     this.loadShoppingInventories();
   }
 
@@ -31,6 +38,7 @@ export class ShoppingProductPage implements OnInit {
       }
     )
   }
+  
   modifyAmount(shoppingProductDTO: ShoppingProductDTO, diff: Number) {
     shoppingProductDTO.amount = shoppingProductDTO.amount.valueOf() + diff.valueOf();
     if(shoppingProductDTO.amount < 0) {
@@ -41,5 +49,65 @@ export class ShoppingProductPage implements OnInit {
 
   updateAmount(shoppingProductDTO: ShoppingProductDTO) {
     this.shoppingService.updateAmountShoppingProduct(shoppingProductDTO).subscribe();
+  }
+
+  buyShoppingProduct(shoppingProduct: ShoppingProductDTO) {
+    this.shoppingService.buyShoppingProduct(shoppingProduct.id).subscribe(
+      data => {
+        this.presentToast("Has comprado " + shoppingProduct.product.name);
+      },
+      err => {
+        this.presentToast("Ha habido un error.");
+      }
+    );
+  }
+
+  deleteShoppingProduct(shoppingProduct: ShoppingProductDTO) {
+    this.shoppingService.deleteShoppingProduct(shoppingProduct.id).subscribe(
+      data => {
+        this.presentToast("Has borrado de la lista " + shoppingProduct.product.name);
+      },
+      err => {
+        this.presentToast("Ha habido un error.");
+      }
+    );
+  }
+
+  async borrarConfirm(shoppingProduct: ShoppingProductDTO) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmar',
+      message: '¿Estás seguro que no quieres comprar este producto?',
+      buttons: [
+        {
+          text: 'Si',
+          id: 'confirm-button',
+          handler: () => {
+             console.log('Confirm Okay');
+            this.deleteShoppingProduct(shoppingProduct);
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 }

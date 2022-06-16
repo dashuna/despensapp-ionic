@@ -25,4 +25,12 @@ export class ShoppingProductService {
     public updateAmountShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<ShoppingProductDTO> {
         return this.httpClient.patch<ShoppingProductDTO>(this.shoppingURL, shoppingProduct);
     }
+
+    public buyShoppingProduct(idShoppingProduct: Number): Observable<ShoppingProductDTO> {
+        return this.httpClient.patch<ShoppingProductDTO>(this.shoppingURL + `/${idShoppingProduct}/buy`, null);
+    }
+
+    public deleteShoppingProduct(idShoppingProduct: Number): Observable<any> {
+        return this.httpClient.delete<any>(this.shoppingURL + `/${idShoppingProduct}`);
+    }
 }
