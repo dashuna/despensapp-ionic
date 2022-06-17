@@ -28,15 +28,15 @@
     </form>
 </ion-content> -->
 
-<ion-header translucent>
+<ion-header [translucent]="true">
     <ion-toolbar color="micolor">
         <ion-title>DespensApp</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-no-margin">
 
-    <div class="signcard" text-center>
+    <div class="signcard">
 
         <ion-segment [(ngModel)]="signform" ion-padding>
             <ion-segment-button value="login" class="segbtn1">
@@ -51,63 +51,89 @@
         </ion-segment>
 
         <div class="loginform" [ngSwitch]="signform">
+
             <div padding *ngSwitchCase="'login'">
-                <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+                <form (ngSubmit)="onSubmit()" #form="ngForm">
                     <ion-item>
                         <ion-label position="floating">Usuario</ion-label>
-                        <ion-input name="email" [(ngModel)]="email" type="text" required></ion-input>
+                        <ion-input name="username" [(ngModel)]="username" type="text" required></ion-input>
                     </ion-item>
 
                     <ion-item>
                         <ion-label position="floating">Contraseña</ion-label>
-                        <ion-input name="password" [(ngModel)]="password" type="text" required></ion-input>
+                        <ion-input name="password" [(ngModel)]="password" type="password" required></ion-input>
                     </ion-item>
 
-                    <ion-button class="ion-margin-top" type="submit" expand="block" color="light">
-                        Signin
+                    <ion-button class="ion-margin-top boton" type="submit" expand="block" color="boton">
+                        Entrar
                     </ion-button>
                 </form>
             </div>
 
             <div padding *ngSwitchCase="'registro'">
-                <ion-item>
-                    <ion-label position="floating">Usuario</ion-label>
-                    <ion-input [(ngModel)]="user" type="text" required></ion-input>
-                </ion-item>
+                <!-- (ngSubmit)="onSubmit()" -->
+                <form [formGroup]="registerForm" (ngSubmit)="createAccount()">
+                    <ion-item>
+                        <ion-label position="floating">Usuario</ion-label>
+                        <ion-input formControlName="username" type="text" name="username" required [ngClass]="{ 'is-invalid': submitted &&  f.username.errors }"></ion-input>
+                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required">Nombre de usuario es obligatorio</div>
+                        </div>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Contraseña</ion-label>
-                    <ion-input [(ngModel)]="password" type="password" required></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Contraseña</ion-label>
+                        <ion-input formControlName="password" type="password" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">La contraseña es obligatoria</div>
+                            <div *ngIf="f.password.errors.minlength">La contraseña debe tener 6 caractéres.</div>
+                        </div>
 
-                <ion-item>
-                    <ion-label position="floating">Nombre</ion-label>
-                    <ion-input [(ngModel)]="name" type="text" required></ion-input>
-                </ion-item>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Apellidos</ion-label>
-                    <ion-input [(ngModel)]="last_name" type="text" required></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Nombre</ion-label>
+                        <ion-input formControlName="name" type="text" required [ngClass]="{ 'is-invalid': submitted &&  f.name.errors }"></ion-input>
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Nombre es obligatorio</div>
+                        </div>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Email</ion-label>
-                    <ion-input [(ngModel)]="email" type="email" required></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Apellidos</ion-label>
+                        <ion-input formControlName="lastname" type="text" required [ngClass]="{ 'is-invalid': submitted &&  f.lastname.errors }"></ion-input>
+                        <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastname.errors.required">Apellido es obligatorio</div>
+                        </div>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Teléfono</ion-label>
-                    <ion-input [(ngModel)]="telephone" type="text" required></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input formControlName="email" type="email" required [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Correo electrónico es obligatorio.</div>
+                            <div *ngIf="f.email.errors.email">Correo electrónico NO es valido.</div>
+                        </div>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Foto</ion-label>
-                    <ion-input [(ngModel)]="photo" type="text" required></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Teléfono</ion-label>
+                        <ion-input formControlName="telephone" type="text" required [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }"></ion-input>
+                        <div *ngIf="submitted && f.telephone.errors" class="invalid-feedback">
+                            <div *ngIf="f.telephone.errors.required">Teléfono es obligatorio</div>
+                            <div *ngIf="f.telephone.errors.minlength">Teléfono debe tener 9 dígitos.</div>
+                        </div>
+                    </ion-item>
 
-                <ion-button class="ion-margin-top" type="submit" expand="block" color="light" (click)="createAccount()">
-                    Registrarse
-                </ion-button>
+                    <ion-item>
+                        <ion-label position="floating">Foto</ion-label>
+                        <ion-input formControlName="photo" type="text" required [ngClass]="{ 'is-invalid': submitted && f.photo.errors }"></ion-input>
+                    </ion-item>
+
+                    <ion-button class="ion-margin-top boton" type="submit" expand="block" color="boton">
+                        Registrarse
+                    </ion-button>
+                </form>
             </div>
         </div>
     </div>
