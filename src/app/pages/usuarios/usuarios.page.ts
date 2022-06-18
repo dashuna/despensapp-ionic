@@ -15,7 +15,6 @@ export class UsuariosPage implements OnInit {
   idInventory: Number;
   users: UserDTO[] = [];
   user: UserInventoryDTO;
-  imAdmin: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -28,7 +27,6 @@ export class UsuariosPage implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
-    // this.isAdmin();
   }
 
   loadUsers(): void {
@@ -42,22 +40,6 @@ export class UsuariosPage implements OnInit {
       }
     )
   }
-
-  // isAdmin() {
-  //   this.inventoryService.getUserByInventory(this.idInventory).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.user = data;
-  //       console.log(this.user);
-  //       this.imAdmin = data.accepted;
-  //       console.log(this.user.isAdmin)
-        
-  //     },
-  //     err => {
-
-  //     }
-  //   )
-  // }
 
   async openModal() {
     const modal = await this.modalController.create({

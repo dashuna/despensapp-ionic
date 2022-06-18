@@ -18,7 +18,7 @@ export class ListaProductoPage implements OnInit {
   idInventory: Number;
   defaultBackLink: string;
   shoppingProduct: ShoppingProductDTO;
-
+  isAdmin: boolean;
 
   constructor(
     private productoService: ProductoService,
@@ -34,6 +34,7 @@ export class ListaProductoPage implements OnInit {
 
   ngOnInit() {
     this.cargarListaProductos();
+    this.getAdmin();
   }
 
   //para que se actualice la pagina con los cambios realizados
@@ -157,6 +158,16 @@ export class ListaProductoPage implements OnInit {
 
     await alert.present();
   }
+
+getAdmin() {
+  this.inventoryService.getUserByInventory(this.idInventory).subscribe(
+    data => {
+      console.log(data);
+      this.isAdmin = data.admin;
+      console.log(this.isAdmin);
+    }
+  );
+}
 }
 
 

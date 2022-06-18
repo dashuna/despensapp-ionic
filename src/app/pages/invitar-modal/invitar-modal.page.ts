@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,6 +15,7 @@ export class InvitarModalPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private inventoryService: InventoryService,
+    private toastController: ToastController
   ) {
   }
 
@@ -27,11 +28,11 @@ export class InvitarModalPage implements OnInit {
     this.inventoryService.sendInvitation(this.idInventory, this.username).subscribe(
       data => {
         console.log(data);
-        
         this.dismissModal(true);
       },
       err => {
-        this.dismissModal(false);
+        this.presentToast(err.error.message);
+        //this.dismissModal(false);
       }
 
     )
@@ -40,6 +41,15 @@ export class InvitarModalPage implements OnInit {
   dismissModal(sended: boolean)  {
     const onClosedData: boolean = sended;
     this.modalController.dismiss(onClosedData);
+  }
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

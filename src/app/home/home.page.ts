@@ -10,7 +10,7 @@ import { TokenService } from '../services/token.service';
 export class HomePage {
 
   isLogged = true;
-  userName = "usuario";
+  userName = "";
   public home: string;
 
   constructor(
@@ -31,6 +31,7 @@ export class HomePage {
   comprobarLogin() {
     if (this.tokenService.isLogged()) {
       //this.router.navigate(['/inventario']);
+      this.userName = this.tokenService.getUserName();
     } else {
       this.router.navigate(['/login']);
     }

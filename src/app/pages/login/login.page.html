@@ -71,16 +71,15 @@
             </div>
 
             <div padding *ngSwitchCase="'registro'">
-                <!-- (ngSubmit)="onSubmit()" -->
                 <form [formGroup]="registerForm" (ngSubmit)="createAccount()">
+
                     <ion-item>
                         <ion-label position="floating">Usuario</ion-label>
-                        <ion-input formControlName="username" type="text" name="username" required [ngClass]="{ 'is-invalid': submitted &&  f.username.errors }"></ion-input>
+                        <ion-input formControlName="username" type="text" name="username" class="form-control" required [ngClass]="{ 'is-invalid': submitted &&  f.username.errors }"></ion-input>
                         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                             <div *ngIf="f.username.errors.required">Nombre de usuario es obligatorio</div>
                         </div>
                     </ion-item>
-
                     <ion-item>
                         <ion-label position="floating">Contraseña</ion-label>
                         <ion-input formControlName="password" type="password" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>

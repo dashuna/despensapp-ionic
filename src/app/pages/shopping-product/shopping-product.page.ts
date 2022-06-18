@@ -11,13 +11,15 @@ import { ToastController, AlertController } from '@ionic/angular';
 })
 export class ShoppingProductPage implements OnInit {
 
-  shoppingInventories: ShoppingInventoryDTO;
+  shoppingInventories: ShoppingInventoryDTO[] = [];
 
   constructor(
     private shoppingService: ShoppingProductService,
     private toastController: ToastController,
     private alertController: AlertController
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit() {
     this.loadShoppingInventories();
@@ -65,7 +67,8 @@ export class ShoppingProductPage implements OnInit {
   deleteShoppingProduct(shoppingProduct: ShoppingProductDTO) {
     this.shoppingService.deleteShoppingProduct(shoppingProduct.id).subscribe(
       data => {
-        this.presentToast("Has borrado de la lista " + shoppingProduct.product.name);
+        this.presentToast("Has borrado " + shoppingProduct.product.name + " de la lista.");
+        this.loadShoppingInventories();
       },
       err => {
         this.presentToast("Ha habido un error.");
@@ -77,7 +80,7 @@ export class ShoppingProductPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirmar',
-      message: '¿Estás seguro que no quieres comprar este producto?',
+      message: '¿Estás seguro que NO quieres comprar este producto?',
       buttons: [
         {
           text: 'Si',
@@ -85,6 +88,7 @@ export class ShoppingProductPage implements OnInit {
           handler: () => {
              console.log('Confirm Okay');
             this.deleteShoppingProduct(shoppingProduct);
+            
           }
         },
         {

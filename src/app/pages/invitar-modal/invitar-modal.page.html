@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="micolor">
         <ion-title>Invitar Amigos</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="dismissModal(false)">Close</ion-button>
@@ -17,7 +17,7 @@
         </ion-item>
 
         <div class="ion-padding">
-            <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!form.valid">
+            <ion-button color="micolor" expand="block" type="submit" class="ion-no-margin boton" [disabled]="!form.valid">
                 <!-- <ion-button color="success" expand="block" type="submit" class="ion-no-margin" (click)="sendInvitation()"> -->
                 Invitar
             </ion-button>

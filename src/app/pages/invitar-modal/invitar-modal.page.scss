@@ -2,5 +2,12 @@ ion-toolbar {
     background-color: var(--ion-color-micolor);
     ion-title {
         font-size: 20px;
+        color: white
     }
+}
+
+.boton {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
 }

@@ -46,4 +46,23 @@
             </ion-item-sliding>
         </ion-list>
     </ion-card>
+
+    <ion-content *ngIf="shoppingInventories.length == 0">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Esta Lista está vacía
+                    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                </ion-card-title>
+                <ion-card-subtitle>
+                    <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content class="ion-text-justify">
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+            </ion-card-content>
+        </ion-card>
+    </ion-content>
+
 </ion-content>

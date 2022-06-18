@@ -19,3 +19,12 @@ ion-toolbar {
 ion-card {
     // margin: 20px;
 }
+
+ion-fab {
+    margin: 10px;
+    ion-fab-button {
+        ion-icon {
+            color: white;
+        }
+    }
+}

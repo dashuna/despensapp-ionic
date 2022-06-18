@@ -18,8 +18,8 @@ export class ShoppingProductService {
         return this.httpClient.post<ShoppingProductDTO>(this.shoppingURL, shoppingProduct);
     }
 
-    public getShopping(): Observable<ShoppingInventoryDTO> {
-        return this.httpClient.get<ShoppingInventoryDTO>(this.shoppingURL);
+    public getShopping(): Observable<ShoppingInventoryDTO[]> {
+        return this.httpClient.get<ShoppingInventoryDTO[]>(this.shoppingURL);
     }
 
     public updateAmountShoppingProduct(shoppingProduct: ShoppingProductDTO): Observable<ShoppingProductDTO> {

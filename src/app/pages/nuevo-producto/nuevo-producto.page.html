@@ -46,24 +46,19 @@
                 <ion-input required type="number" name="amount" [(ngModel)]="amount"></ion-input>
             </ion-item>
 
-
             <div class="ion-padding">
-                <ion-button color="success" expand="block" type="submit" class="ion-no-margin" [disabled]="!form.valid">
-                    <ion-icon name="add-circle" slot="icon-only"></ion-icon>Crear
+                <ion-button color="boton" expand="block" type="submit" class="ion-no-margin boton" [disabled]="!form.valid">
+                    <!-- <ion-icon name="add-circle" slot="icon-only"></ion-icon> -->
+                    Crear
                 </ion-button>
             </div>
 
             <!-- <div class="ion-padding">
-                <ion-button expand="block" class="ion-no-margin" color="secondary" (click)="vaciar()">
-                    <ion-icon name="refresh-circle" slot="icon-only"></ion-icon>Vaciar los campos
+                <ion-button expand="block" class="ion-no-margin boton" color="tertiary" (click)="returnToList()">
+                    <ion-icon name="arrow-back-circle" slot="icon-only"></ion-icon>
+                    Volver
                 </ion-button>
             </div> -->
-
-            <div class="ion-padding">
-                <ion-button expand="block" class="ion-no-margin" color="tertiary" (click)="returnToList()">
-                    <ion-icon name="arrow-back-circle" slot="icon-only"></ion-icon>Volver
-                </ion-button>
-            </div>
         </ion-list>
     </form>
 
