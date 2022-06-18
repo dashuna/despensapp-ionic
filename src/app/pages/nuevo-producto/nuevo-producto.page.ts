@@ -5,6 +5,9 @@ import { CategoryService } from '../../services/category.service';
 import { ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
+
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.page.html',
@@ -17,11 +20,12 @@ export class NuevoProductoPage implements OnInit {
   description = "";
   categories: CategoryDTO[] = [];
   categoryId: Number = 0;
-  photo = null;
   // inventories: InventoryService[] = [];
   amount = null;
   inventoryId: Number;
 
+  selectedImage: any;
+  userImg: any = '';
 
   constructor(
     private productService: ProductoService,
@@ -29,9 +33,9 @@ export class NuevoProductoPage implements OnInit {
     private toastController: ToastController,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { 
+  ) {
     this.inventoryId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
-
+    this.userImg = 'assets/images/no-product.jpg';
   }
 
   ngOnInit() {
@@ -39,10 +43,15 @@ export class NuevoProductoPage implements OnInit {
   }
 
   createProduct() {
-    const categorySelected = new CategoryDTO(this.categoryId, null);  
-    this.product = new Producto(this.name, this.description, categorySelected, this.photo, this.inventoryId, this.amount);
+    const categorySelected = new CategoryDTO(this.categoryId, null);
+    this.product = new Producto(this.name,
+       this.description,
+        categorySelected,
+         this.cleanBase64(this.selectedImage.webPath),
+          this.inventoryId,
+           this.amount);
     // console.log(this.product);
-    
+
     this.productService.createNewProduct(this.product).subscribe(
       data => {
         this.presentToast(data.mensaje);
@@ -51,19 +60,23 @@ export class NuevoProductoPage implements OnInit {
       err => {
         this.presentToast(err.error.mensaje);
       }
-    )
-    
+    );
+
+  }
+
+  cleanBase64(base64: string): string {
+    return base64.split(',')[1];
   }
 
   loadCategories() {
     this.categoryService.getCategories().subscribe(
-     data => {
-      this.categories = data;
-    },
-    err => {
-      console.log(err);
-    }
-    )
+      data => {
+        this.categories = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   selectCategory(idCategory: Number) {
@@ -84,4 +97,22 @@ export class NuevoProductoPage implements OnInit {
     this.router.navigate(['/inventario/'+this.inventoryId+'/lista-producto']);
   }
 
+  checkPlatformForWeb() {
+    return (Capacitor.getPlatform() === 'web' || Capacitor.getPlatform() === 'ios');
+  }
+
+  async getPicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      source: CameraSource.Prompt,
+      width: 600,
+      resultType: this.checkPlatformForWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
+    });
+    console.log('image: ', image);
+    this.userImg = image.dataUrl;
+    this.selectedImage = image;
+    if (this.checkPlatformForWeb()) {
+     this.selectedImage.webPath = image.dataUrl;
+    }
+  }
 }

@@ -8,6 +8,8 @@ import { UserDTO } from '../../models/dtos';
 import { AuthService } from '../../services/auth.service';
 import { ToastController } from '@ionic/angular';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -26,7 +28,10 @@ export class LoginPage implements OnInit {
   avatarimage: any;
 
   newUser: UserDTO;
-  
+
+  selectedImage: any;
+  userImg: any = '';
+
   // name = "";
   // last_name = "";
   // email = "";
@@ -40,9 +45,11 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private toastController: ToastController,
     private formBuilder: FormBuilder
-    ) { }
+    ) {
+      this.userImg = 'assets/images/no-product.jpg';
+    }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.signform = "login"
     this.avatarimage = 'assets/images/avatar.png';
 
@@ -53,7 +60,7 @@ export class LoginPage implements OnInit {
     let postData = {
       "username": this.username,
       "password": this.password
-    }
+    };
 
     this.httpClient.post<JwtDto>(SERVER_URL + "/authenticate", postData)
       .subscribe(data => {
@@ -77,10 +84,9 @@ export class LoginPage implements OnInit {
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      telephone: ['', 
+      telephone: ['',
         [Validators.required, Validators.minLength(9),]
-      ],
-      photo: ['', Validators.required]
+      ]
     }
   );
  }
@@ -93,7 +99,9 @@ export class LoginPage implements OnInit {
     return;
   }
 
-  this.newUser = new UserDTO(this.registerForm.value.username, this.registerForm.value.password, this.registerForm.value.name, this.registerForm.value.last_name, this.registerForm.value.email, this.registerForm.value.telephone, this.registerForm.value.photo);
+  this.newUser = new UserDTO(this.registerForm.value.username, this.registerForm.value.password,
+     this.registerForm.value.name, this.registerForm.value.last_name, this.registerForm.value.email,
+     this.registerForm.value.telephone, this.cleanBase64(this.selectedImage.webPath));
   this.authService.register(this.newUser).subscribe(
     data => {
       this.presentToast("El usuario se ha creado con éxito.");
@@ -101,7 +109,7 @@ export class LoginPage implements OnInit {
         data => {
           this.tokenService.setToken(data.token);
           this.router.navigate(['/']);
-        }, 
+        },
         error => {
           this.presentToast("El usuario NO se ha creado.");
           console.log(error);
@@ -125,5 +133,27 @@ toast.present();
 
 get f(): { [key: string]: AbstractControl } {
   return this.registerForm.controls;
+}
+checkPlatformForWeb() {
+  return (Capacitor.getPlatform() === 'web' || Capacitor.getPlatform() === 'ios');
+}
+
+async getPicture() {
+  const image = await Camera.getPhoto({
+    quality: 90,
+    source: CameraSource.Prompt,
+    width: 600,
+    resultType: this.checkPlatformForWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
+  });
+  console.log('image: ', image);
+  this.userImg = image.dataUrl;
+  this.selectedImage = image;
+  if (this.checkPlatformForWeb()) {
+   this.selectedImage.webPath = image.dataUrl;
+  }
+}
+
+cleanBase64(base64: string): string {
+  return base64.split(',')[1];
 }
 }

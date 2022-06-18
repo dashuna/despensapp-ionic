@@ -1,33 +1,3 @@
-<!-- <ion-header>
-    <ion-toolbar color="danger">
-        <ion-title>Login</ion-title>
-    </ion-toolbar>
-</ion-header> -->
-
-<!-- <ion-content color="danger">
-    <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
-        <ion-item color="danger">
-            <ion-label position="floating">Email</ion-label>
-            <ion-input name="email" [(ngModel)]="email" type="text" required></ion-input>
-        </ion-item>
-
-        <ion-item color="danger">
-            <ion-label position="floating">Password</ion-label>
-            <ion-input name="password" [(ngModel)]="password" type="text" required></ion-input>
-        </ion-item>
-
-        <ion-button class="ion-margin-top" type="submit" expand="block" color="light">
-            Signin
-        </ion-button>
-
-         <ion-item color="danger" class="ion-text-center">
-            <ion-label>Or</ion-label>
-        </ion-item> 
-
-        <ion-button color="dark" expand="block" fill="outline" [routerLink]="['/registro']">Create Account</ion-button>
-    </form>
-</ion-content> -->
-
 <ion-header [translucent]="true">
     <ion-toolbar color="micolor">
         <ion-title>DespensApp</ion-title>
@@ -126,8 +96,9 @@
 
                     <ion-item>
                         <ion-label position="floating">Foto</ion-label>
-                        <ion-input formControlName="photo" type="text" required [ngClass]="{ 'is-invalid': submitted && f.photo.errors }"></ion-input>
-                    </ion-item>
+                        <!-- <ion-input formControlName="photo" type="text" required [ngClass]="{ 'is-invalid': submitted && f.photo.errors }"></ion-input> -->
+                        <img class="user-profile-img" src="{{userImg}}" alt="" (click)="getPicture()">
+                      </ion-item>
 
                     <ion-button class="ion-margin-top boton" type="submit" expand="block" color="boton">
                         Registrarse

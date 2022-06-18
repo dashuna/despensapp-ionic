@@ -23,7 +23,7 @@
 
                 <ion-item>
                     <ion-avatar slot="start">
-                        <img src="{{product.product.photo}}" alt="{{product.product.name}}" />
+                        <img  [src]="'data:image/jpg;base64,'+product.product.photo" alt="{{product.product.name}}" />
                     </ion-avatar>
 
                     <ion-label>

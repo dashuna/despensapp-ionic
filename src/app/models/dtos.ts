@@ -24,11 +24,11 @@ export class Producto {
     name: string;
     description: string;
     category: CategoryDTO;
-    photo: Blob;
+    photo: string;
     inventoryId: Number;
     amount: Number;
 
-    constructor(name: string, description: string, category: CategoryDTO, photo: Blob, inventoryId: Number, amount: Number) {
+    constructor(name: string, description: string, category: CategoryDTO, photo: string, inventoryId: Number, amount: Number) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -46,9 +46,9 @@ export class UserDTO {
     last_name: string;
     email: string;
     telephone: string;
-    photo:Blob;
+    photo: string;
 
-    constructor(user: string, password: string, name: string, last_name: string, email: string, telephone: string, photo:Blob) {
+    constructor(user: string, password: string, name: string, last_name: string, email: string, telephone: string, photo: string) {
         // this.id = id;
         this.user = user;
         this.password = password;
@@ -65,7 +65,7 @@ export class UserInventoryDTO {
     inventory: InventoryDTO;
     accepted: boolean;
     admin: boolean;
-    
+
     constructor(id: Number, inventory: InventoryDTO,  accepted: boolean, admin: boolean) {
         this.id = id;
         this.inventory = inventory;
@@ -116,5 +116,5 @@ export class ShoppingInventoryDTO {
         this.name = name;
         this.products = products;
     }
-       
+
 }
