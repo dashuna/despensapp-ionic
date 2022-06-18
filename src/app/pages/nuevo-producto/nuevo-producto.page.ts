@@ -86,7 +86,7 @@ export class NuevoProductoPage implements OnInit {
   async presentToast(mensaje: String) {
     const toast = await this.toastController.create({
       message: "El producto se ha creado con éxito",
-      color: 'dark',
+      // color: 'dark',
       duration: 2000,
       position: 'bottom'
     });

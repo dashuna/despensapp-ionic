@@ -1,8 +1,8 @@
 <!-- <app-header title="Lista de la compra"></app-header> -->
 <ion-header [translucent]="true">
     <ion-toolbar color="micolor">
-        <ion-buttons slot="start">
-            <!-- <ion-back-button defaultHref="/" text=""></ion-back-button> -->
+        <ion-buttons slot="end" (click)="logOut()">
+            <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
         </ion-buttons>
         <ion-title>Lista de la Compra</ion-title>
     </ion-toolbar>
@@ -23,7 +23,7 @@
 
                 <ion-item>
                     <ion-avatar slot="start">
-                        <img  [src]="'data:image/jpg;base64,'+product.product.photo" alt="{{product.product.name}}" />
+                        <img [src]="'data:image/jpg;base64,'+product.product.photo" alt="{{product.product.name}}" />
                     </ion-avatar>
 
                     <ion-label>

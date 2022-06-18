@@ -46,6 +46,8 @@ export class ListaProductoPage implements OnInit {
     this.productoService.getListaProductos(this.idInventory).subscribe(
       data => {
         this.productos = data;
+        this.checkAmount();
+        console.log(this.productos);
       },
       err => {
         console.log(err);
@@ -168,6 +170,42 @@ getAdmin() {
     }
   );
 }
+
+  checkAmount() {
+    for (let i=0; i<=this.productos.length; i++) {
+      if (this.productos[i].amount == 0) {
+        this.alertAmount(this.productos[i], 1);
+      }
+    }
+  }
+
+
+  async alertAmount(product, amount) {
+    const alert = await this.alertController.create({
+      header: '¡Tu producto ' + product.name + ' está vacío!',
+      message: '¿Deseas añadirlo a la lista de la compra?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          id: 'confirm-button',
+          handler: () => {
+            this.addToShopping(product, amount);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
 
 

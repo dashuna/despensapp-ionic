@@ -50,10 +50,16 @@ export class LoginPage implements OnInit {
     }
 
   ngOnInit() {
-    this.signform = "login"
+    this.signform = "login";
     this.avatarimage = 'assets/images/avatar.png';
 
     this.registerForm = this.buildRegisterForm();
+  }
+
+  ionViewWillEnter() {
+    this.username = "";
+    this.password = "";
+    
   }
 
   onSubmit() {
@@ -67,6 +73,7 @@ export class LoginPage implements OnInit {
         this.tokenService.setToken(data.token);
         this.router.navigate(['/']);
        }, error => {
+        this.presentToast("El usuario o la contraseña son incorrectos.")
         console.log(error);
       });
  }

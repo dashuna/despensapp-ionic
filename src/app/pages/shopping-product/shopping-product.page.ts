@@ -3,6 +3,8 @@ import { ShoppingProductService } from '../../services/shopping.service';
 import { ShoppingInventoryDTO, Producto, ShoppingProductDTO } from '../../models/dtos';
 import { ProductoService } from '../../services/producto.service';
 import { ToastController, AlertController } from '@ionic/angular';
+import { TokenService } from '../../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-product',
@@ -12,11 +14,14 @@ import { ToastController, AlertController } from '@ionic/angular';
 export class ShoppingProductPage implements OnInit {
 
   shoppingInventories: ShoppingInventoryDTO[] = [];
+  isLogged = false;
 
   constructor(
     private shoppingService: ShoppingProductService,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private tokenService: TokenService,
+    private router: Router
   ) {
     
    }
@@ -113,5 +118,11 @@ export class ShoppingProductPage implements OnInit {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  logOut() {
+    this.tokenService.logOut();
+    this.isLogged = false;
+    this.router.navigate(['/login']);
   }
 }

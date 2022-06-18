@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
-    children: [
+    children: [  
       { //inventario
         path: 'inventario',
         children: [
@@ -89,11 +89,11 @@ const routes: Routes = [
       // }
     ],
   },
-  // {
-  //   path: '',
-  //   redirectTo: '../pages/inventario',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: 'inventario',
+    redirectTo: 'inventario',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

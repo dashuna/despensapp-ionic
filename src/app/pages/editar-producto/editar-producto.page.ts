@@ -89,7 +89,7 @@ export class EditarProductoPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: "El producto se ha actualizado con éxito",
-      color: 'dark',
+      // color: 'dark',
       duration: 2000,
       position: 'bottom'
     });

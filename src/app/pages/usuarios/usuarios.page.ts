@@ -29,6 +29,10 @@ export class UsuariosPage implements OnInit {
     this.loadUsers();
   }
 
+  // ionViewWillEnter() {
+  //   this.loadUsers();
+  // }
+
   loadUsers(): void {
     this.inventoryService.getUsersByInventory(this.idInventory).subscribe(
       data => {
@@ -52,6 +56,7 @@ export class UsuariosPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
       if(dataReturned.data) {
         this.presentToast("Se ha enviado la invitacion");
+        this.loadUsers();
       } else {
         this.presentToast("No se ha enviado la invitacion");
       }

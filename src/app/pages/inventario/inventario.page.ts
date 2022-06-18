@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryDTO, UserInventoryDTO } from '../../models/dtos';
 import { ModalController, AlertController, ToastController } from '@ionic/angular';
+import { TokenService } from '../../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventario',
@@ -13,13 +15,17 @@ export class InventarioPage implements OnInit {
   // inventories: InventoryDTO[] = [];
   inventories: UserInventoryDTO[] = [];
   hasInvitations: boolean = false;
+  isLogged = false;
 
   constructor(
     private inventoryService: InventoryService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private tokenService: TokenService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.comprobarLogin();
     this.loadInventories();
   }
 
@@ -63,11 +69,24 @@ export class InventarioPage implements OnInit {
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      color: 'dark',
+      // color: 'dark',
       duration: 2000,
       position: 'bottom'
     });
     await toast.present();
   }
 
+  logOut() {
+    this.tokenService.logOut();
+    this.isLogged = false;
+    this.router.navigate(['/login']);
+  }
+
+  comprobarLogin() {
+    if (this.tokenService.isLogged()) {
+      this.isLogged = true;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 }
