@@ -21,7 +21,7 @@ export class HomePage {
 
   // ngOnInit() {  //-> se ejecuta solo una vez y lo que necesitamos es un ciclo de vida
   //     this.home = this.activatedRoute.snapshot.paramMap.get('id');
-  //     // this.testLogged(); 
+  //     // this.testLogged();
   //   }
 
   ionViewWillEnter() {
@@ -39,7 +39,6 @@ export class HomePage {
   }
 
   logOut() {
-    console.log("entra");
     this.tokenService.logOut();
     this.isLogged = false;
     this.router.navigate(['/login']);

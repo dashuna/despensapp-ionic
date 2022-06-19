@@ -22,24 +22,25 @@ export class InventarioPage implements OnInit {
     private toastController: ToastController,
     private tokenService: TokenService,
     private router: Router
-  ) { }
+  ) {
+    this.tokenService.getLoggedObs().subscribe((value) => {
+      if (value) {
+        this.loadInventories();
+      }
+    });
+   }
 
   ngOnInit() {
-    console.log("Inventario -> ngOnInit");
     this.comprobarLogin();
     this.loadInventories();
   }
 
   ionViewWillEnter() {
-    console.log("Inventario -> ionViewWillEnter");
+    if (this.tokenService.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
     this.loadInventories();
-    // this.isAccepted();
   }
-
-  ionViewDidEnter() {
-    console.log("Inventario -> ionViewDidEnter");
-  }
-
 
 
   public loadInventories() {
@@ -66,7 +67,7 @@ export class InventarioPage implements OnInit {
         this.presentToast("El inventario ha sido Rechazado!");
         }
         this.loadInventories();
-      }, 
+      },
       err => {
         this.presentToast("No se ha podido actualizar el estado de tu Inventario!");
         console.log(err);

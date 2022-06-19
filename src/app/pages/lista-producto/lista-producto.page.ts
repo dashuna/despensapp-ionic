@@ -1,3 +1,4 @@
+import { TokenService } from './../../services/token.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Producto, ShoppingInventoryDTO, ShoppingProductDTO } from 'src/app/models/dtos';
 import { ProductoService } from '../../services/producto.service';
@@ -27,8 +28,9 @@ export class ListaProductoPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private toastController: ToastController,
-    private shoppingService: ShoppingProductService
-  ) { 
+    private shoppingService: ShoppingProductService,
+    private tokenService: TokenService
+  ) {
     this.idInventory = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('idInventario'));
   }
 
@@ -39,6 +41,9 @@ export class ListaProductoPage implements OnInit {
 
   //para que se actualice la pagina con los cambios realizados
   ionViewWillEnter() {
+    if (this.tokenService.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
     this.cargarListaProductos();
   }
 
@@ -114,12 +119,12 @@ export class ListaProductoPage implements OnInit {
 
     this.shoppingProduct = new ShoppingProductDTO(product, null, null, data.unidades, false, null, null);
 
-    // this.amount = 
+    // this.amount =
     this.shoppingService.insertShoppingProduct(this.shoppingProduct).subscribe(
       data => {
         this.presentToast("El producto se ha añadido a la lista de la compra.");
         this.shoppingProduct = data;
-      }, 
+      },
       err => {
         console.log("Error");
         this.presentToast("Este producto ya está en la lista de la compra.")

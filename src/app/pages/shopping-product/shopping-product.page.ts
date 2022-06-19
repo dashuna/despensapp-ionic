@@ -23,7 +23,7 @@ export class ShoppingProductPage implements OnInit {
     private tokenService: TokenService,
     private router: Router
   ) {
-    
+
    }
 
   ngOnInit() {
@@ -31,6 +31,9 @@ export class ShoppingProductPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    if (this.tokenService.getToken() == null) {
+      this.router.navigate(['/login']);
+    }
     this.loadShoppingInventories();
   }
 
@@ -45,7 +48,7 @@ export class ShoppingProductPage implements OnInit {
       }
     )
   }
-  
+
   modifyAmount(shoppingProductDTO: ShoppingProductDTO, diff: Number) {
     shoppingProductDTO.amount = shoppingProductDTO.amount.valueOf() + diff.valueOf();
     if(shoppingProductDTO.amount < 0) {
@@ -94,7 +97,7 @@ export class ShoppingProductPage implements OnInit {
           handler: () => {
              console.log('Confirm Okay');
             this.deleteShoppingProduct(shoppingProduct);
-            
+
           }
         },
         {
