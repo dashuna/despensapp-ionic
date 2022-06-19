@@ -9,11 +9,17 @@ const TOKEN_KEY = 'AuthToken';
 export class TokenService {
   private logged: boolean;
 
-  constructor() { }
+  constructor() { 
+    console.log("YOLO", window.sessionStorage.getItem(TOKEN_KEY));
+    if (window.sessionStorage.getItem(TOKEN_KEY) != null) {
+      this.logged = true;
+    }
+  }
 
   public setToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
+    // window.localStorage.setItem(TOKEN_KEY, token)
     this.logged = true;
   }
 

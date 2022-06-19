@@ -25,16 +25,24 @@ export class InventarioPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("Inventario -> ngOnInit");
     this.comprobarLogin();
     this.loadInventories();
   }
 
   ionViewWillEnter() {
+    console.log("Inventario -> ionViewWillEnter");
     this.loadInventories();
     // this.isAccepted();
   }
 
-  loadInventories() {
+  ionViewDidEnter() {
+    console.log("Inventario -> ionViewDidEnter");
+  }
+
+
+
+  public loadInventories() {
     this.inventoryService.getInventories().subscribe(
       data => {
         this.inventories = data;

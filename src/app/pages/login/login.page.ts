@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private toastController: ToastController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
     ) {
       this.userImg = 'assets/images/no-product.jpg';
     }
