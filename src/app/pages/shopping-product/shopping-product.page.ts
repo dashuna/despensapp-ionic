@@ -62,6 +62,7 @@ export class ShoppingProductPage implements OnInit {
     this.shoppingService.buyShoppingProduct(shoppingProduct.id).subscribe(
       data => {
         this.presentToast("Has comprado " + shoppingProduct.product.name);
+        this.loadShoppingInventories();
       },
       err => {
         this.presentToast("Ha habido un error.");

@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonTabs } from '@ionic/angular';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -9,8 +8,6 @@ import { TokenService } from '../services/token.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  @ViewChild('tabs') tabs: IonTabs;
 
   isLogged = true;
   userName = "";
@@ -31,14 +28,11 @@ export class HomePage {
     this.comprobarLogin();
   }
 
-  ngAfterViewInit() {
-    this.tabs.select("inventario");
-  }
-
   comprobarLogin() {
     if (this.tokenService.isLogged()) {
       //this.router.navigate(['/inventario']);
       this.userName = this.tokenService.getUserName();
+      document.getElementById("tab-button-inventario").click();
     } else {
       this.router.navigate(['/login']);
     }
